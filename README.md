@@ -9,3 +9,6 @@ Potentials: Link to Youtube to play video and Google Authentication for user to 
 George - Youtube API/HTML/CSS/Firebase <br>
 Chris - Branch Master/MusixMatch API/HTML/CSS/Firebase <br>
 Jordan - Spotify API/Google Authenication/Javascript/jQuery/Animate.CSS
+
+
+![alt text](http://url/to/img.png)
