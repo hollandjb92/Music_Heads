@@ -30,15 +30,15 @@
       </div> -->
       <nav class="navbar navbar-dark bg-dark py-4 ">
 
-        <a class="navbar-brand text-white"><i class="fab fa-wolf-pack-battalion text-white fa-lg"></i>
-          MUSICHEADS</a>
+        <a class="navbar-brand text-white"><i class="fab fa-wolf-pack-battalion text-white fa-2x"></i>
+          <span class="projectName">MUSICHEADS</span></a>
         <form class="form-inline">
           <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Search for a Song..."
             aria-label="Search">
-          <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-primary my-2 my-sm-0 shadow-none" type="submit" id="searchButton">Search</button>
         </form>
-        <div id="userButtons"> <button class="btn btn-outline-primary btn" id="login">Login</button>
-          <button class="btn btn-outline-primary btn" id="signup">Sign Up</button></div>
+        <div id="userButtons"> <button class="btn btn-outline-primary btn shadow-none" id="login">Login</button>
+          <button class="btn btn-outline-primary btn shadow-none" id="signup">Sign Up</button></div>
 
 
       </nav>
@@ -49,90 +49,56 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-4 ajaxContent" id="spotify">
-            <div id="nowPlayingContainer">
-              <div id="nowPlayingBar" class="d-flex">
-                <div id="nowPlayingArtist">
-                  <div class="content">
-                    <span class="albumLink">
-                      <img src="https://www.okayplayer.com/wp-content/uploads/2016/08/Blonde-3-715x715.jpg"
-                        class="albumImage">
-                    </span>
-                    <div class="trackInformation">
-                      <span class="trackName">
-                        <span>Pink + White</span>
-                      </span>
-                      <span class="artistName">
-                        <span>Frank Ocean</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
+
+          </div>
+          <div class="col-md-4 ajaxContent" id="youtube">
 
 
-                <div id="nowPlayingControls" class="d-flex">
-                  <div class="content playerControls">
-                    <div class="playerButtons">
+          </div>
+          <div class="col-md-4 ajaxContent" id="lyrics">
 
-                      <button class="controlButton play" title="Play"><i class="far fa-play-circle fa-3x"></i></button>
-                      <button class="controlButton pause" title="Pause"><i
-                          class="far fa-pause-circle fa-3x"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                    </div>
-                    <div class="progressBarContainer d-flex">
-                      <span class="progressTime current">0:00</span>
-                      <div class="progressBar">
-                        <div class="progressBarBackground">
-                          <div class="actualProgress"></div>
-                        </div>
-                      </div>
-                      <span class="progressTime remaining">0:00</span>
-                    </div>
-                  </div>
+    <div id="nowPlayingContainer">
+      <div id="nowPlayingBar" class="d-flex">
+        <div id="nowPlayingArtist">
+          <div class="content">
+            <span class="albumLink">
+              <img src="https://www.okayplayer.com/wp-content/uploads/2016/08/Blonde-3-715x715.jpg" id="albumImage">
+            </span>
+
+          </div>
+        </div>
+
+        <div class="trackInformation">
+          <span class="trackName">
+            <span id="track">Pink + White</span>
+          </span>
+          <span class="artistName">
+            <span id="artist">Frank Ocean</span>
+          </span>
+        </div>
+
+        <div id="nowPlayingControls" class="d-flex">
+          <div class="content playerControls">
+            <div class="playerButtons">
+
+              <button class="controlButton play" title="Play"><i class="far fa-play-circle fa-3x"></i></button>
+              <button class="controlButton pause" title="Pause"><i class="far fa-pause-circle fa-3x"></i></button>
+
+            </div>
+            <!-- <div class="progressBarContainer d-flex">
+              <span class="progressTime current">0:00</span>
+              <div class="progressBar">
+                <div class="progressBarBackground">
+                  <div class="actualProgress"></div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-5 ajaxContent"="youtube">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus possimus, aliquam quisquam omnis
-            quos iure ex optio reprehenderit nam expedita officia saepe earum tempore iusto harum dolores delectus culpa
-            laborum minima adipisci ratione rerum. Quaerat tempore dolorum officiis. Laborum rem vel deleniti? Minima
-            aspernatur autem iusto fugiat placeat. Numquam provident quasi saepe voluptatum aspernatur ex. Laboriosam
-            officiis veniam provident aliquid eligendi, molestiae placeat quis voluptatem earum quam! Perspiciatis
-            soluta, eligendi quibusdam id necessitatibus quos deserunt facere quis assumenda deleniti, velit dolores.
-            Earum, assumenda molestias, quia pariatur veniam nisi accusamus aut beatae eveniet quam magnam? Ea incidunt
-            dolores harum nemo rerum quaerat nulla sint quis nisi ipsam! Cupiditate, doloribus voluptas, accusantium
-            quas eius a quod natus tenetur porro iste exercitationem. Repellendus delectus magni at necessitatibus animi
-            nulla eos mollitia dolorum architecto! Optio fugiat amet placeat voluptatum iusto in sequi cumque qui
-            officiis sunt! Sint ex temporibus accusamus provident, sed, debitis, rem beatae numquam quae velit vel quis.
-            Omnis, minima sequi. Quasi voluptatibus necessitatibus eaque aliquam, rerum facere vel, commodi obcaecati
-            amet assumenda doloribus ducimus soluta quaerat a odio aperiam unde consequatur. Id dolore magnam ullam ea
-            et recusandae quidem blanditiis placeat ipsa nesciunt? Accusantium voluptatum laboriosam ipsa similique
-            magnam cumque consectetur sapiente dolorem repudiandae, facere vel error at aliquid tempore, animi
-            architecto perferendis delectus aut! Quisquam cumque ipsam quibusdam nobis architecto! Dolorem perferendis
-            tenetur eum illum aperiam, fugiat porro exercitationem earum error vitae, repellat architecto aliquid
-            voluptas sit facere reiciendis ipsam molestias blanditiis beatae atque soluta eveniet! Ipsam doloribus nulla
-            numquam.
-
-          </div>
-          <div class="col-md-3 ajaxContent" id="lyrics">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, tenetur animi numquam doloremque eos iure
-            repudiandae quam asperiores sint expedita impedit alias eveniet odio. Aliquid obcaecati quidem repellat
-            asperiores deserunt, ullam excepturi atque magni quia, temporibus iure eius, nostrum perspiciatis. Eligendi
-            qui commodi nam? Ex dolore corporis voluptate eos nihil tempore natus illum id laborum quos molestiae
-            accusantium, consequuntur impedit at totam autem aut laboriosam. Incidunt aperiam labore excepturi corrupti
-            dicta aut beatae ut, cupiditate cum enim sapiente consectetur sit nulla consequatur earum nesciunt dolores.
-            Voluptate provident harum perferendis quidem autem temporibus reiciendis, libero enim beatae! Dolores
-            necessitatibus officiis recusandae pariatur enim consectetur ipsam, odio rerum rem dicta debitis et nostrum
-            laborum, quae fuga quis quod fugiat totam perferendis? Animi necessitatibus odio asperiores autem, ipsum
-            veniam vero praesentium odit! Eveniet obcaecati veritatis ipsa, veniam minus blanditiis nesciunt sapiente
-            sint iure facilis esse quis hic laudantium eos odio ex enim suscipit fuga. Voluptas est amet nam corrupti, a
-            quas? Perspiciatis, debitis eum, consequuntur laudantium minus hic neque ipsam facilis a repellat nihil
-            quibusdam error quasi recusandae commodi earum excepturi ullam rem quia alias officiis incidunt enim in
-            voluptatem. Dolorem aliquam aut, reprehenderit alias, veniam quasi id harum quis quia ad, necessitatibus
-            accusamus architecto ea. Aperiam sint officia consequuntur. Accusamus veritatis eaque repellat atque
-            praesentium, iste illum earum repudiandae nemo nobis quia officiis a eligendi libero odit, fugiat veniam
-            molestias! Quidem voluptas dignissimos natus vitae perferendis ut qui consequuntur, quia alias sunt pariatur
-            doloribus quae eveniet repellat vel ipsam necessitatibus explicabo culpa!
+              <span class="progressTime remaining">0:00</span>
+            </div> -->
           </div>
         </div>
       </div>

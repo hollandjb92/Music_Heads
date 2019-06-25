@@ -1,11 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Fredoka+One);
 
 body {
-  font-family: 'Fredoka One', cursive !important;
+  font-family: "Fredoka One", cursive !important;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 
+  background: url("../headphones.png") no-repeat;
+  background-color: rgba(255, 255, 255, 0.6);
+  background-blend-mode: lighten;
+  background-size: cover;
 }
 
 .jumbotron {
@@ -37,10 +41,8 @@ body {
   margin-top: -1.8%;
 }
 
-
-
 h1 {
-  font-family: 'Fredoka One', cursive !important;
+  font-family: "Fredoka One", cursive !important;
   text-align: center;
 }
 
@@ -62,8 +64,9 @@ button {
   width: 150px;
 }
 
-button:hover {
-  color: white;
+button:hover,
+i:hover {
+  color: #ef5526;
 }
 
 #searchArea {
@@ -90,11 +93,9 @@ p {
   text-align: center;
 }
 
-
 #login {
   margin-right: 10px;
 }
-
 
 #userbuttons button {
   display: inline-flex;
@@ -108,22 +109,38 @@ p {
 
 .btn-primary,
 .btn-outline-primary {
-  background-color: #EF5526;
+  background-color: #ef5526;
   color: white;
-  border: 1px solid #EF5526;
+  border: 1px solid #ef5526;
 }
 
 .btn-primary:hover,
 .btn-outline-primary:hover {
-  background-color: #C2E4D3;
-  color: #EF5526
+  background-color: #c2e4d3;
+  color: #ef5526;
+}
+
+#spotify,
+#youtube,
+#lyrics {
+  text-align: center;
+}
+
+#spotify .controlButton,
+#youtube .controlButton,
+#lyrics .controlButton {
+  color: #000;
+  margin-top: 10px;
+}
+
+#spotify .controlButton:hover,
+#youtube .controlButton:hover,
+#lyrics .controlButton:hover {
+  color: #ef5526;
 }
 
 #middleContainer {
-  background: url("../headphones.png") no-repeat center center;
-  background-color: rgba(255, 255, 255, 0.6);
-  background-blend-mode: lighten;
-  background-size: cover;
+  text-align: center;
 }
 
 .navbar-brand {
@@ -131,18 +148,37 @@ p {
 }
 
 form {
-  margin-left: 325px;
+  margin-left: 100px;
+}
+
+.searchResult {
+  margin-top: 15px;
+}
+
+.projectName {
+  font-size: 32px;
+}
+
+.playArtist {
+  font-size: 1.75rem;
+}
+
+.playTrack {
+  font-size: 2rem;
+  display: block;
+  margin-top: 30px;
 }
 
 /* CSS FOR THE PLAYER BAR */
 
 #nowPlayingContainer {
   width: 33%;
-  background-color: #282828;
+  background-color: #343a40;
   bottom: 0;
   left: 0;
   min-width: 250px;
   position: fixed;
+  padding-top: 5px;
   padding-bottom: 5px;
 }
 
@@ -150,6 +186,8 @@ form {
   height: 120px;
   padding: 16px;
   box-sizing: border-box;
+  /* THIS */
+  justify-content: space-between;
 }
 
 #nowPlayingArtist,
@@ -161,7 +199,6 @@ form {
 #nowPlayingVolume {
   position: relative;
   margin-top: 30px;
-
 }
 
 #nowPlayingControls {
@@ -174,10 +211,11 @@ form {
 #nowPlayingBar .content {
   width: 100%;
   height: 100%;
+  min-width: 180px;
 }
 
 .playerControls .playerButtons {
-  margin: 0 auto;
+  margin: 10px auto;
   display: table;
 }
 
@@ -187,6 +225,7 @@ form {
   vertical-align: middle;
   color: #a0a0a0;
   margin-right: 10px;
+  text-align: center;
 }
 
 .progressTime {
@@ -225,17 +264,17 @@ form {
   margin-top: 25px;
 }
 
-#nowPlayingArtist .albumImage {
+#nowPlayingArtist #albumImage {
   height: 100%;
-  max-width: 100px;
+  max-width: 125px;
   margin-right: 25px;
   float: left;
   background-size: cover;
-  margin-top: -10px;
 }
 
 .trackInformation {
   display: table;
+  margin-top: 5px;
 }
 
 .trackInformation .trackName {
@@ -243,11 +282,12 @@ form {
   width: 100%;
   display: inline-block;
   color: #fff;
-  text-align: center;
+  text-align: left;
+  font-size: 1.25rem;
 }
 
 .artistName span {
-  font-size: 12px;
+  font-size: 1rem;
   color: #a0a0a0;
 }
 
