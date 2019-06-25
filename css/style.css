@@ -1,0 +1,262 @@
+@import url(https://fonts.googleapis.com/css?family=Fredoka+One);
+
+body {
+  font-family: 'Fredoka One', cursive !important;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+
+}
+
+.jumbotron {
+  background-image: url("../headphones.png");
+  color: white;
+}
+
+.jumbotron h1 {
+  margin: auto;
+  transform: rotate(10deg);
+  font-size: 350% !important;
+  padding: 2%;
+  border: 1px solid white;
+  width: 50%;
+  border-radius: 80%;
+  background-color: orangered;
+  color: white !important;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 50px solid transparent;
+  position: relative;
+  margin-left: 40%;
+  transform: rotate(10deg);
+  border-top: 60px solid orangered;
+  margin-top: -1.8%;
+}
+
+
+
+h1 {
+  font-family: 'Fredoka One', cursive !important;
+  text-align: center;
+}
+
+input {
+  width: 25%;
+  height: 50px;
+  font-size: 2em;
+  text-align: center;
+}
+
+button {
+  height: 45px;
+  font-size: 1.25em;
+  border: 1px solid grey;
+  border-radius: 2%;
+}
+
+#navBar button {
+  width: 150px;
+}
+
+button:hover {
+  color: white;
+}
+
+#searchArea {
+  text-align: center;
+}
+
+img {
+  float: left;
+  margin-right: 10%;
+  margin-left: 25%;
+}
+
+p {
+  margin-right: 5%;
+  font-family: sans-serif;
+}
+
+#lyrics {
+  width: 80%;
+  margin: auto;
+}
+
+.ajaxContent {
+  text-align: center;
+}
+
+
+#login {
+  margin-right: 10px;
+}
+
+
+#userbuttons button {
+  display: inline-flex;
+  width: 30%;
+  text-align: center;
+}
+
+#searchInput {
+  width: 350px;
+}
+
+.btn-primary,
+.btn-outline-primary {
+  background-color: #EF5526;
+  color: white;
+  border: 1px solid #EF5526;
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+  background-color: #C2E4D3;
+  color: #EF5526
+}
+
+#middleContainer {
+  background: url("../headphones.png") no-repeat center center;
+  background-color: rgba(255, 255, 255, 0.6);
+  background-blend-mode: lighten;
+  background-size: cover;
+}
+
+.navbar-brand {
+  letter-spacing: 2px;
+}
+
+form {
+  margin-left: 325px;
+}
+
+/* CSS FOR THE PLAYER BAR */
+
+#nowPlayingContainer {
+  width: 33%;
+  background-color: #282828;
+  bottom: 0;
+  left: 0;
+  min-width: 250px;
+  position: fixed;
+  padding-bottom: 5px;
+}
+
+#nowPlayingBar {
+  height: 120px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#nowPlayingArtist,
+#nowPlayingVolume {
+  width: 30%;
+  min-width: 180px;
+}
+
+#nowPlayingVolume {
+  position: relative;
+  margin-top: 30px;
+
+}
+
+#nowPlayingControls {
+  width: 40%;
+  max-width: 700px;
+  flex-direction: column;
+  align-items: center;
+}
+
+#nowPlayingBar .content {
+  width: 100%;
+  height: 100%;
+}
+
+.playerControls .playerButtons {
+  margin: 0 auto;
+  display: table;
+}
+
+.controlButton {
+  background-color: transparent;
+  border: none;
+  vertical-align: middle;
+  color: #a0a0a0;
+  margin-right: 10px;
+}
+
+.progressTime {
+  color: #a0a0a0;
+  font-size: 12px;
+  min-width: 40px;
+  text-align: center;
+}
+
+.progressBar {
+  width: 100%;
+  height: 13px;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.progressBarBackground {
+  background-color: #404040;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.actualProgress {
+  background-color: #a0a0a0;
+  height: 4px;
+  width: 0;
+  border-radius: 2px;
+}
+
+.progressBarContainer .progressBar {
+  margin-top: 5px;
+}
+
+.progressBarContainer {
+  margin-top: 25px;
+}
+
+#nowPlayingArtist .albumImage {
+  height: 100%;
+  max-width: 100px;
+  margin-right: 25px;
+  float: left;
+  background-size: cover;
+  margin-top: -10px;
+}
+
+.trackInformation {
+  display: table;
+}
+
+.trackInformation .trackName {
+  margin: 6px 0;
+  width: 100%;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+}
+
+.artistName span {
+  font-size: 12px;
+  color: #a0a0a0;
+}
+
+.volumeBar {
+  width: 180px;
+  position: absolute;
+  right: 30px;
+}
+
+.volumeBar .progressBar {
+  width: 125px;
+}
