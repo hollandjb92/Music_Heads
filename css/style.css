@@ -12,22 +12,6 @@ body {
   background-size: cover;
 }
 
-.jumbotron {
-  background-image: url("../headphones.png");
-  color: white;
-}
-
-.jumbotron h1 {
-  margin: auto;
-  transform: rotate(10deg);
-  font-size: 350% !important;
-  padding: 2%;
-  border: 1px solid white;
-  width: 50%;
-  border-radius: 80%;
-  background-color: orangered;
-  color: white !important;
-}
 
 .triangle {
   width: 0;
@@ -58,6 +42,7 @@ button {
   font-size: 1.25em;
   border: 1px solid grey;
   border-radius: 2%;
+  outline: none !important;
 }
 
 #navBar button {
@@ -79,14 +64,26 @@ img {
   margin-left: 25%;
 }
 
+a,
+a:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  transform: scale(1.1);
+}
+
 p {
   margin-right: 5%;
   font-family: sans-serif;
 }
 
 #lyrics {
-  width: 80%;
-  margin: auto;
+  /* width: 80%;
+  margin: auto; */
+
+  overflow: auto;
 }
 
 .ajaxContent {
@@ -95,6 +92,10 @@ p {
 
 #login {
   margin-right: 10px;
+}
+
+.row {
+  height: calc(100vh - 96px);
 }
 
 #userbuttons button {
@@ -141,10 +142,15 @@ p {
 
 #middleContainer {
   text-align: center;
+  margin-top: 10px;
 }
 
 .navbar-brand {
   letter-spacing: 2px;
+}
+
+.navbar {
+  height: 96px;
 }
 
 form {
@@ -159,6 +165,11 @@ form {
   font-size: 32px;
 }
 
+.play:hover,
+.pause:hover {
+  transform: scale(1.1);
+}
+
 .playArtist {
   font-size: 1.75rem;
 }
@@ -167,6 +178,13 @@ form {
   font-size: 2rem;
   display: block;
   margin-top: 30px;
+}
+
+.displayLyrics {
+  letter-spacing: 2px;
+  line-height: 175%;
+  font-size: 1.2rem;
+  margin-top: 20px;
 }
 
 /* CSS FOR THE PLAYER BAR */
@@ -273,8 +291,7 @@ form {
 }
 
 .trackInformation {
-  display: table;
-  margin-top: 5px;
+  margin-top: -5px;
 }
 
 .trackInformation .trackName {
