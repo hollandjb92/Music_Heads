@@ -9,7 +9,7 @@
 //make background not change - because lyrics take up too much space
 
 let spotifyToken =
-  "BQAkwusq129yjvtyglg2yhbKUgRf6oPnEGJVJNDDomHM0QymJoOB0Cqx_URSFV4-XCOGJSr0al_TBjWBm46ajBlKtosQV6kuoB1DYHLGxLObtPOp6x4cQCvu3iw2lbF_VgbY8n4zw1cLY1yOH88CDCzdDt3MEB72HMHTD2I";
+  "BQCRFEB74pnib72832UOwr59b0xrRHgls3DD8W41X7IGiRgeaLn9nBeY8g0I-VTKXtC6MKEotmDWB0uKL7d2kEOPdtwxmgXMudFcx6KC8V64a8Vcso9sFmgt_MQoBKQTe8W03nKKt8PvdI8J2cAclywn940Xgc3k6e0sl4E";
 
 window.onSpotifyWebPlaybackSDKReady = () => {
   const player = new Spotify.Player({
@@ -149,15 +149,19 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       url: queryUrl,
       method: "GET"
     }).then(function (response) {
-      console.log(response);
+
+      let lyrics = (response.result.track.text).split("]")
+      // .replace(/[(]/g, "$&\n").replace(/[)]/g, "$&\n").replace(/[[]/g, "$&\n").replace(/[/]]/g, "$&\n")
+
+      console.log(lyrics);
       if (isEmpty($("#lyrics"))) {
         $("#lyrics").append(
-          $("<div id='lyricResult' class='animated slideInUp'>").append(
-            "<span class='displayLyrics'>" +
-            response.result.track.text +
-            "</span>"
-          )
-        );
+          $("<div id='lyricResult' class='animated slideInUp'>"));
+        lyrics.forEach(function (lyric) {
+          lyric = lyric.replace(/[[]/g, " ")
+          console.log(lyric)
+          $("<p class='displayLyrics'>").html(lyric).appendTo($("#lyricResult"));
+        })
       }
     });
   });
