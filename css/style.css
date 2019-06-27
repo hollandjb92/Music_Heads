@@ -183,8 +183,9 @@ form {
 .displayLyrics {
   letter-spacing: 2px;
   line-height: 175%;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-top: 20px;
+  font-weight: 700;
 }
 
 /* CSS FOR THE PLAYER BAR */
