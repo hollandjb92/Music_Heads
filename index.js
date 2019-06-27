@@ -1,5 +1,26 @@
 //CHRIS'S CODE
+$(document).ready(function () {
+ 
+$("#submit").on("click", function (event) {
 
+  event.preventDefault()
+  var songSearch = $("#songSearch").val().trim();
+  var artistSearch = $("#artistSearch").val().trim();
+  var apiKey = "apikey=Wf0E7jjJpbuaCL9DKtaw7DNvsh0PqwLI8KX2I9YTn9cuQYiUs0domYZT81FTFewC";
+    var queryUrl = "https://orion.apiseeds.com/api/music/lyric/" + artistSearch + "/" + songSearch + "?" + apiKey;
+  console.log(queryUrl);
+
+    $.ajax({
+      url: queryUrl,
+      method: "GET",      
+    })
+    .then(function(response){
+      console.log(response);
+      $("#lyrics").append(response.result.track.text);
+    })})
+ 
+  });
+  
 
 
 
