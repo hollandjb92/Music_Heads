@@ -6,9 +6,13 @@ Description(MVP): Using the Spotify API and MusixMatch API, created a website th
 
 Potentials: Link to Youtube to play video and Google Authentication for user to save songs (Firebase).Suggest songs user might like based on their favorite songs (Spotify API)
 
-George - Youtube API/HTML/CSS/Firebase <br>
-Chris - Branch Master/MusixMatch API/HTML/CSS/Firebase <br>
-Jordan - Spotify API/Google Authenication/Javascript/jQuery/Animate.CSS
+List of Tech Used (so far): HTML, CSS, Youtube API, Spotify API, APISeeds Lyrics, Animate CSS, Javascript, jQuery
+ 
+George - Youtube API/Javascript/jQuery<br>
+Chris - Branch Master/APISeeds Lyrics API/jQuery/Javascript/HTML/CSS <br>
+Jordan - Spotify API/HTML/CSS/FlexBox/jQuery/Javascript/Animate.CSS
+
+
 
 
 
