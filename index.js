@@ -4,12 +4,16 @@
 
 //JORDAN'S CODE
 
-//move divs to proper locations
-//animate.css  - make animation happen for playing bar upon every click
-//make background not change - because lyrics take up too much space
+
 
 let spotifyToken =
-  "BQCRFEB74pnib72832UOwr59b0xrRHgls3DD8W41X7IGiRgeaLn9nBeY8g0I-VTKXtC6MKEotmDWB0uKL7d2kEOPdtwxmgXMudFcx6KC8V64a8Vcso9sFmgt_MQoBKQTe8W03nKKt8PvdI8J2cAclywn940Xgc3k6e0sl4E";
+  "BQAye6NuUbMbLLVrNO9rf7C-wftOTPnT2ScTchGR0PGjsxm5uW5wDxYev4x5qrBRiZiqo57FWQ4VFAMQpIbCTThP3uo6eM9hwN-pD49xGZnbFHwxHgQ67zn_jcJ_JiLnn2KV0Jif0StqXtORXPgqNpLS0bX6b3d-TqBU9No";
+
+function isEmpty(element) {
+  return !$.trim(element.html());
+}
+
+
 
 window.onSpotifyWebPlaybackSDKReady = () => {
   const player = new Spotify.Player({
@@ -96,6 +100,10 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       playerTrack === playerTrack;
     }
 
+    // let duration = $(this).data("duration");
+    // duration = parseInt(duration) * 1.35;
+    // console.log(duration);
+
     $("#lyrics").css("max-height", "500px");
 
     $("#track")
@@ -119,7 +127,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         .parent()
         .removeClass("animated slideInUp");
       $("#youtube, #lyrics").empty();
-    } else {
+    } else if ($(this).parent().parent().attr("id") === "youtube") {
       $("#spotify").empty();
       $(this)
         .parent(".searchResult")
@@ -127,12 +135,20 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         .addClass("slideInRight")
         .appendTo("#spotify");
       $("#youtube, #lyrics").empty();
+    } else {
+      $("#spotify").empty();
+      $(this)
+        .parent(".searchResult")
+        .removeClass("slideInUp")
+        .addClass("slideInRightRight")
+        .appendTo("#spotify");
+      $("#youtube, #lyrics").empty();
     }
 
     //for displaying lyrics
     artistSearch = $(this).data("artist");
 
-    songSearch = $(this).data("track");
+    songSearch = $(this).data("track").replace(/[.,\/#!$%\"^&\*;:{}=\-_`~()]/g, "");
 
     var apiKey =
       "apikey=Wf0E7jjJpbuaCL9DKtaw7DNvsh0PqwLI8KX2I9YTn9cuQYiUs0domYZT81FTFewC";
@@ -147,7 +163,10 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
     $.ajax({
       url: queryUrl,
-      method: "GET"
+      method: "GET",
+      error: function () {
+        $("<p id='noLyrics' class='animated jackInTheBox'>").html("NO LYRICS FOUND").appendTo($("#lyrics"));
+      }
     }).then(function (response) {
 
       let lyrics = (response.result.track.text).split("]")
@@ -163,47 +182,21 @@ window.onSpotifyWebPlaybackSDKReady = () => {
           $("<p class='displayLyrics'>").html(lyric).appendTo($("#lyricResult"));
         })
       }
+
+
+
+      // let myDiv = $("#lyrics");
+      // myDiv.animate({
+      //   scrollTop: myDiv[0].scrollHeight
+      // }, duration)
+
     });
+
+
   });
 
-  function isEmpty(element) {
-    return !$.trim(element.html());
-  }
 
-  //this is for albums
-  // $(document).on("click", ".apiPlayAlbum", function () {
 
-  //   let play = ({
-  //     playerInstance: {
-  //       _options: {
-  //         getOAuthToken
-  //       }
-  //     }
-  //   }) => {
-  //     getOAuthToken(access_token => {
-
-  //       fetch(`https://api.spotify.com/v1/me/player/play`, {
-  //         method: 'PUT',
-  //         body: JSON.stringify({
-  //           "context_uri": "spotify:album:" + $(this).data("request"),
-  //           "offset": {
-  //             "position": 0
-  //           },
-  //           "position_ms": 0
-  //         }),
-  //         headers: {
-  //           "Accept": "application/json",
-  //           'Content-Type': 'application/json',
-  //           'Authorization': "Bearer " + spotifyToken
-  //         },
-  //       });
-  //     });
-  //   };
-
-  //   play({
-  //     playerInstance: player,
-  //   });
-  // });
 
   // Connect to the player!
   player.connect();
@@ -222,6 +215,8 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 };
 
 $(document).on("click", "#searchButton", function (event) {
+
+  $("#lyrics").css("max-height", "");
   event.preventDefault();
   let query = $("#searchInput")
     .val()
@@ -252,6 +247,7 @@ $(document).on("click", "#searchButton", function (event) {
         .attr("data-track", res.tracks.items[0].name)
         .attr("data-cover", res.tracks.items[0].album.images[2].url)
         .attr("data-request", res.tracks.items[0].id)
+        .attr("data-duration", res.tracks.items[0].duration_ms)
         .append("<i>")
         .addClass("far fa-play-circle fa-4x")
       )
@@ -282,6 +278,7 @@ $(document).on("click", "#searchButton", function (event) {
         .attr("data-track", res.tracks.items[1].name)
         .attr("data-cover", res.tracks.items[1].album.images[2].url)
         .attr("data-request", res.tracks.items[1].id)
+        .attr("data-duration", res.tracks.items[1].duration_ms)
         .append("<i>")
         .addClass("far fa-play-circle fa-4x")
       )
@@ -312,6 +309,7 @@ $(document).on("click", "#searchButton", function (event) {
         .attr("data-track", res.tracks.items[2].name)
         .attr("data-cover", res.tracks.items[2].album.images[2].url)
         .attr("data-request", res.tracks.items[2].id)
+        .attr("data-duration", res.tracks.items[2].duration_ms)
         .append("<i>")
         .addClass("far fa-play-circle fa-4x")
       )
@@ -332,3 +330,140 @@ $(document).on("click", "#searchButton", function (event) {
     );
   });
 });
+
+$(window).scroll(function () {
+  $('#lyrics').css("display", "none");
+});
+
+function showRegisterForm() {
+  $('.loginBox').fadeOut('fast', function () {
+    $('.registerBox').fadeIn('fast');
+    $('.login-footer').fadeOut('fast', function () {
+      $('.register-footer').fadeIn('fast');
+    });
+    $('.modal-title').html('Register');
+  });
+  $('.error').removeClass('alert alert-danger').html('');
+
+}
+
+function showLoginForm() {
+  $('#loginModal .registerBox').fadeOut('fast', function () {
+    $('.loginBox').fadeIn('fast');
+    $('.register-footer').fadeOut('fast', function () {
+      $('.login-footer').fadeIn('fast');
+    });
+
+    $('.modal-title').html('Login via');
+  });
+  $('.error').removeClass('alert alert-danger').html('');
+}
+
+function openLoginModal() {
+  showLoginForm();
+  setTimeout(function () {
+    $('#loginModal').modal('show');
+  }, 230);
+
+}
+
+function openRegisterModal() {
+  showRegisterForm();
+  setTimeout(function () {
+    $('#loginModal').modal('show');
+  }, 230);
+
+}
+
+
+
+function shakeModal() {
+  $('#loginModal .modal-dialog').addClass('shake');
+  $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
+  $('input[type="password"]').val('');
+  setTimeout(function () {
+    $('#loginModal .modal-dialog').removeClass('shake');
+  }, 1000);
+}
+
+//FIREBASE USER AUTH
+
+var firebaseConfig = {
+  apiKey: "AIzaSyBs4mWHMkPE15ZKuISK7qVN5igCC_vPAO8",
+  authDomain: "musicheads-57896.firebaseapp.com",
+  databaseURL: "https://musicheads-57896.firebaseio.com",
+  projectId: "musicheads-57896",
+  storageBucket: "",
+  messagingSenderId: "329833828196",
+  appId: "1:329833828196:web:429652341533a3a9"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+$(document).on("click", ".btn-register", function (event) {
+  event.preventDefault();
+
+  let email = $(".registerBox #email").val();
+  let password = $(".registerBox #password").val();
+  let password2 = $(".registerBox #password_confirmation").val();
+
+  $(".registerBox #email").val("");
+  $(".registerBox #password").val("");
+  $(".registerBox #password_confirmation").val("");
+
+  if (email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+    alert("Please Format Email Properly")
+  }
+
+
+  if (password.length < 6) {
+    alert("Password must be at least 6 characters")
+  } else if (password != password2) {
+    alert("Passwords do not match")
+    return
+  } else {
+    alert("Sign Up Successful")
+    $('#loginModal').modal('hide');
+  }
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(function (user) {
+    console.log(user)
+    $("#signup").text("Logout").removeAttr("id").attr("id", "logout").removeAttr("onclick");
+    $("#login").text(user.user.email).css("width", "auto").removeAttr("id").attr("id", "userProfile").removeAttr("onclick");
+
+  }).catch(function (err) {
+    console.log(err)
+  })
+})
+
+$(document).on("click", ".btn-login", function (event) {
+  event.preventDefault();
+
+  let email = $(".loginBox #email").val();
+  let password = $(".loginBox #password").val();
+
+  $(".loginBox #email").val("");
+  $(".loginBox #password").val("");
+
+  firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+    console.log(user)
+  }).catch(function (err) {
+    console.log(err)
+    shakeModal();
+  })
+
+  $('#loginModal').modal('hide');
+
+})
+
+$(document).on("click", "#logout", function (event) {
+  event.preventDefault();
+
+  firebase.auth().signOut().then(function () {
+    alert("User Signed Out")
+    $("#userProfile").text("Login").removeAttr("id").attr("id", "login").attr("onClick", "openLoginModal();").css("width", "150px")
+    $("#logout").text("Sign Up").removeAttr("id").attr("id", "signup").attr("onClick", "openRegisterModal();")
+  }).catch(function (err) {
+    console.log(err)
+  })
+})

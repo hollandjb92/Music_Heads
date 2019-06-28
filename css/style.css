@@ -5,25 +5,13 @@ body {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-
+  overflow: hidden;
   background: url("../headphones.png") no-repeat;
   background-color: rgba(255, 255, 255, 0.6);
   background-blend-mode: lighten;
   background-size: cover;
 }
 
-
-.triangle {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 50px solid transparent;
-  position: relative;
-  margin-left: 40%;
-  transform: rotate(10deg);
-  border-top: 60px solid orangered;
-  margin-top: -1.8%;
-}
 
 h1 {
   font-family: "Fredoka One", cursive !important;
@@ -40,13 +28,14 @@ input {
 button {
   height: 45px;
   font-size: 1.25em;
-  border: 1px solid grey;
   border-radius: 2%;
   outline: none !important;
+  box-shadow: none;
 }
 
 #navBar button {
   width: 150px;
+  border: 1px solid #ef5526 !important;
 }
 
 button:hover,
@@ -79,10 +68,14 @@ p {
   font-family: sans-serif;
 }
 
-#lyrics {
-  /* width: 80%;
-  margin: auto; */
+#noLyrics {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  margin: 200px auto 0;
+  font-family: "Fredoka One", cursive !important;
+}
 
+#lyrics {
   overflow: auto;
 }
 
@@ -90,7 +83,8 @@ p {
   text-align: center;
 }
 
-#login {
+#login,
+#userProfile {
   margin-right: 10px;
 }
 
@@ -116,10 +110,17 @@ p {
 }
 
 .btn-primary:hover,
-.btn-outline-primary:hover {
+.btn-outline-primary:hover,
+#logout:active,
+#userProfile:active,
+#login:active,
+#signup:active,
+#searchButton:active {
   background-color: #c2e4d3;
   color: #ef5526;
 }
+
+
 
 #spotify,
 #youtube,
@@ -183,8 +184,8 @@ form {
 .displayLyrics {
   letter-spacing: 2px;
   line-height: 175%;
-  font-size: 1.4rem;
-  margin-top: 20px;
+  font-size: 1.5rem;
+  font-family: "Fredoka One", cursive !important;
   font-weight: 700;
 }
 
@@ -317,4 +318,332 @@ form {
 
 .volumeBar .progressBar {
   width: 125px;
+}
+
+/* login/register */
+
+/*
+ *
+ * login-register modal
+ * Autor: Creative Tim
+ * Web-autor: creative.tim
+ * Web script: http://creative-tim.com
+ * 
+ */
+
+/*  Shake animation  */
+
+@charset "UTF-8";
+
+.animated {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.hinges {
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  -o-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.animated.slow {
+  -webkit-animation-duration: 3s;
+  -moz-animation-duration: 3s;
+  -o-animation-duration: 3s;
+  animation-duration: 3s;
+}
+
+.animated.snail {
+  -webkit-animation-duration: 4s;
+  -moz-animation-duration: 4s;
+  -o-animation-duration: 4s;
+  animation-duration: 4s;
+}
+
+@-webkit-keyframes shake {
+
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translateX(10px);
+  }
+}
+
+@-moz-keyframes shake {
+
+  0%,
+  100% {
+    -moz-transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -moz-transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -moz-transform: translateX(10px);
+  }
+}
+
+@-o-keyframes shake {
+
+  0%,
+  100% {
+    -o-transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -o-transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -o-transform: translateX(10px);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+.shake {
+  -webkit-animation-name: shake;
+  -moz-animation-name: shake;
+  -o-animation-name: shake;
+  animation-name: shake;
+}
+
+.login .modal-dialog {
+  width: 350px;
+}
+
+.login .modal-content {
+  text-align: center;
+}
+
+
+
+.login .modal-footer {
+  border-top: 0;
+  margin-top: 0px;
+  padding: 10px 20px 20px;
+}
+
+.login .modal-header {
+  border: 0 none;
+  padding: 15px 15px 15px;
+  /*     padding: 11px 15px; */
+}
+
+
+
+.login .division {
+  float: none;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.login .division .line {
+  border-top: 1px solid #DFDFDF;
+  position: absolute;
+  top: 10px;
+  width: 34%;
+}
+
+.login .division .line.l {
+  left: 0;
+}
+
+.login .division .line.r {
+  right: 0;
+}
+
+.login .division span {
+  color: #424242;
+  font-size: 17px;
+}
+
+
+.login .forgot a,
+.login .forgot {
+  color: #797979;
+  margin-left: 0;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}
+
+.login .forgot a {
+  text-decoration: underline;
+  color: #000;
+}
+
+.login .forgot a:hover {
+  color: #ef5526;
+}
+
+.login .btn-login,
+.registerBox .btn-register {
+  background-color: #ef5526;
+  border-color: #ef5526;
+  border-width: 0;
+  color: #FFFFFF;
+  display: block;
+  margin: auto;
+  padding: 15px 50px;
+  width: 100%;
+  position: relative;
+  right: 45px;
+}
+
+.login .btn-login:hover,
+.registerBox .btn-register:hover {
+  background-color: #df4010;
+  color: #FFFFFF;
+}
+
+.login .form-control {
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.09);
+  box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.09) inset;
+  color: #FFFFFF;
+}
+
+.login .form-control:hover {
+  background-color: rgba(0, 0, 0, .16);
+}
+
+.login .form-control:focus {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
+  background-color: rgba(0, 0, 0, 0.23);
+  color: #FFFFFF;
+}
+
+.login .box .form input[type="text"],
+.login .box .form input[type="password"] {
+  border-radius: 3px;
+  border: none;
+  color: #333333;
+  font-size: 16px;
+  height: 46px;
+  margin-bottom: 5px;
+  padding: 13px 12px;
+  width: 100%;
+  position: relative;
+  right: 45px;
+}
+
+
+@media (max-width:400px) {
+  .login .modal-dialog {
+    width: 100%;
+  }
+}
+
+.big-login,
+.big-register {
+  background-color: #ef5526;
+  color: #FFFFFF;
+  border-radius: 7px;
+  border-width: 2px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 200;
+  padding: 16px 60px;
+  transition: all 0.3s ease 0s;
+}
+
+.big-login:hover {
+  background-color: #df4010;
+  color: #FFFFFF;
+}
+
+.big-register {
+  background-color: rgba(0, 0, 0, .0);
+  color: #ef5526;
+  border-color: #ef5526;
+}
+
+.big-register:hover {
+  border-color: #df4010;
+  color: #df4010;
+}
+
+.modal-title {
+  margin-left: 180px;
+  position: relative;
+  right: 100px;
+}
+
+.modal-title::after {
+  content: "";
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  height: 0.5em;
+  border-top: 2px solid #ef5526;
+}
+
+#userEmail {
+  position: relative;
+  top: 48px;
+  right: 50px;
+  font-size: 300px;
 }
