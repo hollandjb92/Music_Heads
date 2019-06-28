@@ -7,7 +7,7 @@
 
 
 let spotifyToken =
-  "BQAye6NuUbMbLLVrNO9rf7C-wftOTPnT2ScTchGR0PGjsxm5uW5wDxYev4x5qrBRiZiqo57FWQ4VFAMQpIbCTThP3uo6eM9hwN-pD49xGZnbFHwxHgQ67zn_jcJ_JiLnn2KV0Jif0StqXtORXPgqNpLS0bX6b3d-TqBU9No";
+  "BQBc-jHvJrvqEsmKQaL2A1YIvQkFfe65hwxNC2Y4hH_l0RRBRya2TmqACO6eaaOvXaI0NqukuqaP8Xs1a4nQ6qpsXwnGKv6WwAaGknGBpLA7lR0qsjijdiAm1yPIyZJRt3odV2Fx4Tpou_4m-w7OV9AuLvtkElfYzxLaAGg";
 
 function isEmpty(element) {
   return !$.trim(element.html());
