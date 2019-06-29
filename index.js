@@ -5,14 +5,14 @@
 //JORDAN'S CODE
 
 let spotifyToken =
-  "BQDypL-GpRG1if3BtGbmTFS10a3Tjw5Jj9NSisFPtqriiWpFxu9iZxoOGYCZS7sQOhZ3h0MT25PrWTvdEXAVbTrwhMwT_peN_winVrjltwsz19Dy8Of8r191iKm0NBFcZpL8MVp907xfvXpfSkgMxz6QsKlAF68pmorVE1s";
+  "BQCg9qcj2FTx9Tzjw3ewXQC_BBRklALwPQSq-Bi2tOEFgo7I5hEJO_zZehqXd4Bq2_Seg1PmC6T5qqgYnDRhJrMoa_ySml5mTiOFKC07AwAP3eJwWgPg8P15HnRe8umPomWDWps5dsgzaomL-Ir_J-IOrsZn-OOBy8eFsPo";
 
 function isEmpty(element) {
   return !$.trim(element.html());
 }
 
 function resultsLoop(data) {
-  $.each(data.items, function(i, item) {
+  $.each(data.items, function (i, item) {
     var thumb = item.snippet.thumbnails.medium.url;
     var title = item.snippet.title;
     var desc = item.snippet.description.substring(0, 100);
@@ -41,16 +41,24 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   });
 
   // Error handling
-  player.addListener("initialization_error", ({ message }) => {
+  player.addListener("initialization_error", ({
+    message
+  }) => {
     console.error(message);
   });
-  player.addListener("authentication_error", ({ message }) => {
+  player.addListener("authentication_error", ({
+    message
+  }) => {
     console.error(message);
   });
-  player.addListener("account_error", ({ message }) => {
+  player.addListener("account_error", ({
+    message
+  }) => {
     console.error(message);
   });
-  player.addListener("playback_error", ({ message }) => {
+  player.addListener("playback_error", ({
+    message
+  }) => {
     console.error(message);
   });
 
@@ -60,20 +68,26 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   });
 
   // Ready
-  player.addListener("ready", ({ device_id }) => {
+  player.addListener("ready", ({
+    device_id
+  }) => {
     console.log("Ready with Device ID", device_id);
   });
 
   // Not Ready
-  player.addListener("not_ready", ({ device_id }) => {
+  player.addListener("not_ready", ({
+    device_id
+  }) => {
     console.log("Device ID has gone offline", device_id);
   });
 
-  $(document).on("click", ".apiPlayTrack", function() {
+  $(document).on("click", ".apiPlayTrack", function () {
     let play = ({
       spotify_uri,
       playerInstance: {
-        _options: { getOAuthToken }
+        _options: {
+          getOAuthToken
+        }
       }
     }) => {
       getOAuthToken(access_token => {
@@ -121,9 +135,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
     if (
       $(this)
-        .parent()
-        .parent()
-        .attr("id") === "spotify"
+      .parent()
+      .parent()
+      .attr("id") === "spotify"
     ) {
       $(this)
         .parent()
@@ -132,9 +146,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       $("#youtube, #lyrics").empty();
     } else if (
       $(this)
-        .parent()
-        .parent()
-        .attr("id") === "youtube"
+      .parent()
+      .parent()
+      .attr("id") === "youtube"
     ) {
       $("#spotify").empty();
       $(this)
@@ -174,12 +188,12 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     $.ajax({
       url: queryUrl,
       method: "GET",
-      error: function() {
+      error: function () {
         $("<p id='noLyrics' class='animated jackInTheBox'>")
           .html("NO LYRICS FOUND")
           .appendTo($("#lyrics"));
       }
-    }).then(function(response) {
+    }).then(function (response) {
       let lyrics = response.result.track.text.split("]");
       // .replace(/[(]/g, "$&\n").replace(/[)]/g, "$&\n").replace(/[[]/g, "$&\n").replace(/[/]]/g, "$&\n")
 
@@ -187,7 +201,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         $("#lyrics").append(
           $("<div id='lyricResult' class='animated slideInUp'>")
         );
-        lyrics.forEach(function(lyric) {
+        lyrics.forEach(function (lyric) {
           lyric = lyric.replace(/[[]/g, " ");
           console.log(lyric);
           $("<p class='displayLyrics'>")
@@ -197,8 +211,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       }
 
       let myDiv = $("#lyrics");
-      myDiv.animate(
-        {
+      myDiv.animate({
           scrollTop: myDiv[0].scrollHeight
         },
         duration
@@ -217,7 +230,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       key: gapikey
     };
 
-    $.getJSON(URL, options, function(data) {
+    $.getJSON(URL, options, function (data) {
       console.log(data);
       let id = data.items[0].id.videoId;
       let id2 = data.items[1].id.videoId;
@@ -237,20 +250,20 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   // Connect to the player!
   player.connect();
 
-  $(".play").on("click", function() {
+  $(".play").on("click", function () {
     player.resume().then(() => {
       console.log("Resumed!");
     });
   });
 
-  $(".pause").on("click", function() {
+  $(".pause").on("click", function () {
     player.pause().then(() => {
       console.log("Paused!");
     });
   });
 };
 
-$(document).on("click", "#searchButton", function(event) {
+$(document).on("click", "#searchButton", function (event) {
   $("#lyrics").css("max-height", "");
   event.preventDefault();
   let query = $("#searchInput")
@@ -265,7 +278,7 @@ $(document).on("click", "#searchButton", function(event) {
     headers: {
       Authorization: "Bearer " + spotifyToken
     }
-  }).done(function(res) {
+  }).done(function (res) {
     console.log(res);
 
     $("#spotify, #youtube, #lyrics").empty();
@@ -278,107 +291,107 @@ $(document).on("click", "#searchButton", function(event) {
     //adding image and buttons
     $("#spotify").append(
       $("<div>")
-        .addClass("searchResult animated slideInUp")
-        .append("<img src='" + res.tracks.items[0].album.images[1].url + "'>")
-        .append(
-          $("<button>")
-            .addClass("controlButton apiPlayTrack")
-            .attr("data-artist", res.tracks.items[0].artists[0].name)
-            .attr("data-track", res.tracks.items[0].name)
-            .attr("data-cover", res.tracks.items[0].album.images[2].url)
-            .attr("data-request", res.tracks.items[0].id)
-            .attr("data-duration", res.tracks.items[0].duration_ms)
-            .append("<i>")
-            .addClass("far fa-play-circle fa-4x")
-        )
-        .append(
-          $("<button>")
-            .addClass("controlButton favouriteButton")
-            .append("<i>")
-            .addClass("far fa-heart fa-4x")
-        )
-        .append(
-          "<span class='playTrack'>" + res.tracks.items[0].name + "</span>"
-        )
-        .append(
-          "<span class='playArtist'>" +
-            res.tracks.items[0].artists[0].name +
-            "</span>"
-        )
+      .addClass("searchResult animated slideInUp")
+      .append("<img src='" + res.tracks.items[0].album.images[1].url + "'>")
+      .append(
+        $("<button>")
+        .addClass("controlButton apiPlayTrack")
+        .attr("data-artist", res.tracks.items[0].artists[0].name)
+        .attr("data-track", res.tracks.items[0].name)
+        .attr("data-cover", res.tracks.items[0].album.images[2].url)
+        .attr("data-request", res.tracks.items[0].id)
+        .attr("data-duration", res.tracks.items[0].duration_ms)
+        .append("<i>")
+        .addClass("far fa-play-circle fa-4x")
+      )
+      .append(
+        $("<button>")
+        .addClass("controlButton favouriteButton")
+        .append("<i>")
+        .addClass("far fa-heart fa-4x")
+      )
+      .append(
+        "<span class='playTrack'>" + res.tracks.items[0].name + "</span>"
+      )
+      .append(
+        "<span class='playArtist'>" +
+        res.tracks.items[0].artists[0].name +
+        "</span>"
+      )
     );
 
     $("#youtube").append(
       $("<div>")
-        .addClass("searchResult animated slideInUp")
-        .append("<img src='" + res.tracks.items[1].album.images[1].url + "'>")
-        .append(
-          $("<button>")
-            .addClass("controlButton apiPlayTrack")
-            .attr("data-artist", res.tracks.items[1].artists[0].name)
-            .attr("data-track", res.tracks.items[1].name)
-            .attr("data-cover", res.tracks.items[1].album.images[2].url)
-            .attr("data-request", res.tracks.items[1].id)
-            .attr("data-duration", res.tracks.items[1].duration_ms)
-            .append("<i>")
-            .addClass("far fa-play-circle fa-4x")
-        )
-        .append(
-          $("<button>")
-            .addClass("controlButton favouriteButton")
-            .append("<i>")
-            .addClass("far fa-heart fa-4x")
-        )
-        .append(
-          "<span class='playTrack'>" + res.tracks.items[1].name + "</span>"
-        )
-        .append(
-          "<span class='playArtist'>" +
-            res.tracks.items[1].artists[0].name +
-            "</span>"
-        )
+      .addClass("searchResult animated slideInUp")
+      .append("<img src='" + res.tracks.items[1].album.images[1].url + "'>")
+      .append(
+        $("<button>")
+        .addClass("controlButton apiPlayTrack")
+        .attr("data-artist", res.tracks.items[1].artists[0].name)
+        .attr("data-track", res.tracks.items[1].name)
+        .attr("data-cover", res.tracks.items[1].album.images[2].url)
+        .attr("data-request", res.tracks.items[1].id)
+        .attr("data-duration", res.tracks.items[1].duration_ms)
+        .append("<i>")
+        .addClass("far fa-play-circle fa-4x")
+      )
+      .append(
+        $("<button>")
+        .addClass("controlButton favouriteButton")
+        .append("<i>")
+        .addClass("far fa-heart fa-4x")
+      )
+      .append(
+        "<span class='playTrack'>" + res.tracks.items[1].name + "</span>"
+      )
+      .append(
+        "<span class='playArtist'>" +
+        res.tracks.items[1].artists[0].name +
+        "</span>"
+      )
     );
 
     $("#lyrics").append(
       $("<div>")
-        .addClass("searchResult animated slideInUp")
-        .append("<img src='" + res.tracks.items[2].album.images[1].url + "'>")
-        .append(
-          $("<button>")
-            .addClass("controlButton apiPlayTrack")
-            .attr("data-artist", res.tracks.items[2].artists[0].name)
-            .attr("data-track", res.tracks.items[2].name)
-            .attr("data-cover", res.tracks.items[2].album.images[2].url)
-            .attr("data-request", res.tracks.items[2].id)
-            .attr("data-duration", res.tracks.items[2].duration_ms)
-            .append("<i>")
-            .addClass("far fa-play-circle fa-4x")
-        )
-        .append(
-          $("<button>")
-            .addClass("controlButton favouriteButton")
-            .append("<i>")
-            .addClass("far fa-heart fa-4x")
-        )
-        .append(
-          "<span class='playTrack'>" + res.tracks.items[2].name + "</span>"
-        )
-        .append(
-          "<span class='playArtist'>" +
-            res.tracks.items[2].artists[0].name +
-            "</span>"
-        )
+      .addClass("searchResult animated slideInUp")
+      .append("<img src='" + res.tracks.items[2].album.images[1].url + "'>")
+      .append(
+        $("<button>")
+        .addClass("controlButton apiPlayTrack")
+        .attr("data-artist", res.tracks.items[2].artists[0].name)
+        .attr("data-track", res.tracks.items[2].name)
+        .attr("data-cover", res.tracks.items[2].album.images[2].url)
+        .attr("data-request", res.tracks.items[2].id)
+        .attr("data-duration", res.tracks.items[2].duration_ms)
+        .append("<i>")
+        .addClass("far fa-play-circle fa-4x")
+      )
+      .append(
+        $("<button>")
+        .addClass("controlButton favouriteButton")
+        .append("<i>")
+        .addClass("far fa-heart fa-4x")
+      )
+      .append(
+        "<span class='playTrack'>" + res.tracks.items[2].name + "</span>"
+      )
+      .append(
+        "<span class='playArtist'>" +
+        res.tracks.items[2].artists[0].name +
+        "</span>"
+      )
     );
   });
 });
 
-$(window).scroll(function() {
+$(window).scroll(function () {
   $("#lyrics").css("display", "none");
 });
 
 function showRegisterForm() {
-  $(".loginBox").fadeOut("fast", function() {
+  $(".loginBox").fadeOut("fast", function () {
     $(".registerBox").fadeIn("fast");
-    $(".login-footer").fadeOut("fast", function() {
+    $(".login-footer").fadeOut("fast", function () {
       $(".register-footer").fadeIn("fast");
     });
     $(".modal-title").html("Register");
@@ -389,9 +402,9 @@ function showRegisterForm() {
 }
 
 function showLoginForm() {
-  $("#loginModal .registerBox").fadeOut("fast", function() {
+  $("#loginModal .registerBox").fadeOut("fast", function () {
     $(".loginBox").fadeIn("fast");
-    $(".register-footer").fadeOut("fast", function() {
+    $(".register-footer").fadeOut("fast", function () {
       $(".login-footer").fadeIn("fast");
     });
 
@@ -404,14 +417,14 @@ function showLoginForm() {
 
 function openLoginModal() {
   showLoginForm();
-  setTimeout(function() {
+  setTimeout(function () {
     $("#loginModal").modal("show");
   }, 230);
 }
 
 function openRegisterModal() {
   showRegisterForm();
-  setTimeout(function() {
+  setTimeout(function () {
     $("#loginModal").modal("show");
   }, 230);
 }
@@ -422,7 +435,7 @@ function shakeModal() {
     .addClass("alert alert-danger")
     .html("Invalid email/password combination");
   $('input[type="password"]').val("");
-  setTimeout(function() {
+  setTimeout(function () {
     $("#loginModal .modal-dialog").removeClass("shake");
   }, 1000);
 }
@@ -443,11 +456,11 @@ firebase.initializeApp(firebaseConfig);
 
 let databse = firebase.database();
 
-$(document).on("click", ".btn-register", function(event) {
+$(document).on("click", ".btn-register", function (event) {
   event.preventDefault();
 
-  let email = $(".registerBox #email").val();
-  let password = $(".registerBox #password").val();
+  let email = $(".registerBox #email2").val();
+  let password = $(".registerBox #password2").val();
   let password2 = $(".registerBox #password_confirmation").val();
 
   if (email.indexOf("@") == -1 || email.indexOf(".") == -1) {
@@ -464,14 +477,14 @@ $(document).on("click", ".btn-register", function(event) {
     $("#loginModal").modal("hide");
   }
 
-  $(".registerBox #email").val("");
-  $(".registerBox #password").val("");
+  $(".registerBox #email2").val("");
+  $(".registerBox #password2").val("");
   $(".registerBox #password_confirmation").val("");
 
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(function(user) {
+    .then(function (user) {
       console.log(user);
       $("#signup")
         .text("Logout")
@@ -485,12 +498,12 @@ $(document).on("click", ".btn-register", function(event) {
         .attr("id", "userProfile")
         .removeAttr("onclick");
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
     });
 });
 
-$(document).on("click", ".btn-login", function(event) {
+$(document).on("click", ".btn-login", function (event) {
   event.preventDefault();
 
   let email = $(".loginBox #email").val();
@@ -499,7 +512,7 @@ $(document).on("click", ".btn-login", function(event) {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function(user) {
+    .then(function (user) {
       console.log(user);
       $("#signup")
         .text("Logout")
@@ -513,7 +526,7 @@ $(document).on("click", ".btn-login", function(event) {
         .attr("id", "userProfile")
         .removeAttr("onclick");
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
       alert("Incorrect Password or Username");
       shakeModal();
@@ -525,13 +538,13 @@ $(document).on("click", ".btn-login", function(event) {
   $("#loginModal").modal("hide");
 });
 
-$(document).on("click", "#logout", function(event) {
+$(document).on("click", "#logout", function (event) {
   event.preventDefault();
 
   firebase
     .auth()
     .signOut()
-    .then(function() {
+    .then(function () {
       alert("User Signed Out");
       $("#userProfile")
         .text("Login")
@@ -545,7 +558,7 @@ $(document).on("click", "#logout", function(event) {
         .attr("id", "signup")
         .attr("onClick", "openRegisterModal();");
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
     });
 });
