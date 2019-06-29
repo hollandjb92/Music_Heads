@@ -28,7 +28,8 @@
             <div class="content">
               <div class="form loginBox" novalidate>
                 <form method="" action="index.html" accept-charset="UTF-8">
-                  <input id="email" class="form-control" type="text" placeholder="Email" name="email" required>
+                  <input id="email" class="form-control" type="text" placeholder="Email" name="email" required
+                    autocomplete="off">
                   <input id="password" pattern=".{6,}" class=" form-control" type="password" placeholder="Password"
                     name="password" required>
                   <input class="btn btn-default btn-login" type="submit" value="Login">
@@ -40,7 +41,8 @@
             <div class="content registerBox" style="display:none;">
               <div class="form">
                 <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
-                  <input id="email" class="form-control" type="text" placeholder="Email" name="email" required>
+                  <input id="email" class="form-control" type="text" placeholder="Email" name="email" required
+                    autocomplete="off">
                   <input id="password" pattern=".{6,20}" class=" form-control" type="password" placeholder="Password"
                     name="password" required>
                   <input id="password_confirmation" pattern=".{6,20}" class=" form-control" type="password"
@@ -79,7 +81,7 @@
           <span class="projectName">MUSICHEADS</span></a>
         <form class="form-inline">
           <input class="form-control mr-sm-2" id="searchInput" type="search" placeholder="Start Searching..."
-            aria-label="Search">
+            aria-label="Search" autocomplete="off">
           <button class="btn btn-primary my-2 my-sm-0 shadow-none" type="submit" id="searchButton">Search</button>
         </form>
         <div id="userButtons"> <button class="btn btn-outline-primary btn shadow-none" data-toggle="modal" id="login"
@@ -155,6 +157,7 @@
 
 
   </div>
+
 
 
 

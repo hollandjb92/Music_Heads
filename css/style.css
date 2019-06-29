@@ -75,6 +75,13 @@ p {
   font-family: "Fredoka One", cursive !important;
 }
 
+#noResults {
+  font-size: 3.5rem;
+  letter-spacing: 2px;
+  margin: 275px auto 0;
+  font-family: "Fredoka One", cursive !important;
+}
+
 #lyrics {
   overflow: auto;
 }
@@ -626,7 +633,7 @@ form {
 }
 
 .modal-title {
-  margin-left: 180px;
+  margin-left: 182px;
   position: relative;
   right: 100px;
 }
