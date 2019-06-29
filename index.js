@@ -5,7 +5,7 @@
 //JORDAN'S CODE
 
 let spotifyToken =
-  "BQCg9qcj2FTx9Tzjw3ewXQC_BBRklALwPQSq-Bi2tOEFgo7I5hEJO_zZehqXd4Bq2_Seg1PmC6T5qqgYnDRhJrMoa_ySml5mTiOFKC07AwAP3eJwWgPg8P15HnRe8umPomWDWps5dsgzaomL-Ir_J-IOrsZn-OOBy8eFsPo";
+  "BQDiEd89z3-6M9eHu4NqjEpl72sMp0WDX7zYDD9VIkdkUKC427WRlvmlHmmlqSdHU7FUiuLa6GMkxXJnQTkGQzXW-3gi-GZI4pnjW1-2TIv-h2s6PllJpLkA_oUBC4I8xCgKXcoHB099F2eNX46O3-jPiBMaDJeV1TiA9rU";
 
 function isEmpty(element) {
   return !$.trim(element.html());
@@ -118,7 +118,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     }
 
     let duration = $(this).data("duration");
-    duration = parseInt(duration) * 1.35;
+    duration = parseInt(duration) * 1.3;
     console.log(duration);
 
     $("#lyrics").css("max-height", "500px");
@@ -241,7 +241,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
     function mainVid(id) {
       $("#youtube").append(`
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}"
+    <iframe width="560" height="315" class='animated fadeInUp youtubeVid' src="https://www.youtube.com/embed/${id}"
     frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     `);
     }
@@ -308,6 +308,9 @@ $(document).on("click", "#searchButton", function (event) {
         $("<button>")
         .addClass("controlButton favouriteButton")
         .append("<i>")
+        .attr("data-artist", res.tracks.items[0].artists[0].name)
+        .attr("data-track", res.tracks.items[0].name)
+        .attr("data-request", res.tracks.items[0].id)
         .addClass("far fa-heart fa-4x")
       )
       .append(
@@ -339,6 +342,9 @@ $(document).on("click", "#searchButton", function (event) {
         $("<button>")
         .addClass("controlButton favouriteButton")
         .append("<i>")
+        .attr("data-artist", res.tracks.items[1].artists[0].name)
+        .attr("data-track", res.tracks.items[1].name)
+        .attr("data-request", res.tracks.items[1].id)
         .addClass("far fa-heart fa-4x")
       )
       .append(
@@ -370,6 +376,9 @@ $(document).on("click", "#searchButton", function (event) {
         $("<button>")
         .addClass("controlButton favouriteButton")
         .append("<i>")
+        .attr("data-artist", res.tracks.items[2].artists[0].name)
+        .attr("data-track", res.tracks.items[2].name)
+        .attr("data-request", res.tracks.items[2].id)
         .addClass("far fa-heart fa-4x")
       )
       .append(
@@ -561,4 +570,20 @@ $(document).on("click", "#logout", function (event) {
     .catch(function (err) {
       console.log(err);
     });
+});
+
+$(document).on("click", ".favouriteButton", function (event) {
+  $(this)
+    .addClass("fas favourited")
+    .removeClass("far")
+    .css("color", "#ef5526");
+
+  // writeToFavorites($(this).data("track"), $(this).data("artist"), $(this).data("request"))
+});
+
+$(document).on("click", ".favourited", function () {
+  $(this)
+    .addClass("far")
+    .removeClass("fas favourited")
+    .css("color", "#000");
 });

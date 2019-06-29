@@ -12,6 +12,15 @@ body {
   background-size: cover;
 }
 
+iframe {
+  display: block;
+  margin: 0 auto;
+}
+
+iframe:first-of-type {
+  margin-bottom: 10px;
+}
+
 
 h1 {
   font-family: "Fredoka One", cursive !important;
@@ -51,6 +60,8 @@ img {
   float: left;
   margin-right: 10%;
   margin-left: 25%;
+  margin-bottom: 10px;
+
 }
 
 a,
@@ -84,6 +95,14 @@ p {
 
 #lyrics {
   overflow: auto;
+}
+
+#lyricResult {
+  margin-left: 90px;
+}
+
+.favourited {
+  color: #ef5526;
 }
 
 .ajaxContent {
@@ -127,6 +146,10 @@ p {
   color: #ef5526;
 }
 
+
+.displayLyrics:first-of-type {
+  margin-top: 20px;
+}
 
 
 #spotify,
