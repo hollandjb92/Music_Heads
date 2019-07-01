@@ -1,6 +1,6 @@
 //Spotify Access Token
 let spotifyToken =
-  "BQDMAEQ_C4UfEi4sDM61O-zWpjvcQH5QIZpxK6kd6WBTxSVTij0DnbnSsIazXYXe6GLtsOISjBjRkwIfsBUcvxPwWcB6279fd6i_y2NBiNc_gt6kXGlTtuz6e8-jinnOvjkSVI3t0XFZJ3MUS7EEIDPXLxPIvM5q8Hyz6ro";
+  "BQDxiey7FOT5gc1Lcs17cHO0Rs2Di6c2HiizyWhCYNXkYPoXAL2_B--CUK6pJuFN-tjfNUf5KWg-lBs9m1rZpiJrhoD6Nh_cQWF0jOrFPohEgH5gtOCsSJj6hbbgcI7ZYRId46brK4o8IKVuTlpSEhTYsJMgiZ6MQf4hjwk";
 
 //function to check if an element is empty
 function isEmpty(element) {
@@ -9,7 +9,7 @@ function isEmpty(element) {
 
 //loop through Youtube API response
 function resultsLoop(data) {
-  $.each(data.items, function(i, item) {
+  $.each(data.items, function (i, item) {
     var thumb = item.snippet.thumbnails.medium.url;
     var title = item.snippet.title;
     var desc = item.snippet.description.substring(0, 100);
@@ -39,16 +39,24 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   });
 
   // Error handling
-  player.addListener("initialization_error", ({ message }) => {
+  player.addListener("initialization_error", ({
+    message
+  }) => {
     console.error(message);
   });
-  player.addListener("authentication_error", ({ message }) => {
+  player.addListener("authentication_error", ({
+    message
+  }) => {
     console.error(message);
   });
-  player.addListener("account_error", ({ message }) => {
+  player.addListener("account_error", ({
+    message
+  }) => {
     console.error(message);
   });
-  player.addListener("playback_error", ({ message }) => {
+  player.addListener("playback_error", ({
+    message
+  }) => {
     console.error(message);
   });
 
@@ -58,21 +66,27 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   });
 
   // Ready
-  player.addListener("ready", ({ device_id }) => {
+  player.addListener("ready", ({
+    device_id
+  }) => {
     console.log("Ready with Device ID", device_id);
   });
 
   // Not Ready
-  player.addListener("not_ready", ({ device_id }) => {
+  player.addListener("not_ready", ({
+    device_id
+  }) => {
     console.log("Device ID has gone offline", device_id);
   });
 
   //when the user clicks the track they want to play
-  $(document).on("click", ".apiPlayTrack", function() {
+  $(document).on("click", ".apiPlayTrack", function () {
     let play = ({
       spotify_uri,
       playerInstance: {
-        _options: { getOAuthToken }
+        _options: {
+          getOAuthToken
+        }
       }
     }) => {
       //fetch request
@@ -128,9 +142,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     //base animations on what starting div the song the user selected is in.
     if (
       $(this)
-        .parent()
-        .parent()
-        .attr("id") === "spotify"
+      .parent()
+      .parent()
+      .attr("id") === "spotify"
     ) {
       $(this)
         .parent()
@@ -139,9 +153,9 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       $("#youtube, #lyrics").empty();
     } else if (
       $(this)
-        .parent()
-        .parent()
-        .attr("id") === "youtube"
+      .parent()
+      .parent()
+      .attr("id") === "youtube"
     ) {
       $("#spotify").empty();
       $(this)
@@ -182,12 +196,12 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     $.ajax({
       url: queryUrl,
       method: "GET",
-      error: function() {
+      error: function () {
         $("<p id='noLyrics' class='animated jackInTheBox'>")
           .html("NO LYRICS FOUND")
           .appendTo($("#lyrics"));
       }
-    }).then(function(response) {
+    }).then(function (response) {
       //split lyrics at ] for slightly better formatting
       let lyrics = response.result.track.text.split("]");
 
@@ -196,7 +210,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         $("#lyrics").append(
           $("<div id='lyricResult' class='animated slideInUp'>")
         );
-        lyrics.forEach(function(lyric) {
+        lyrics.forEach(function (lyric) {
           lyric = lyric.replace(/[[]/g, " ");
           console.log(lyric);
           $("<p class='displayLyrics'>")
@@ -207,8 +221,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
       //scroll animation for lyrics
       let myDiv = $("#lyrics");
-      myDiv.animate(
-        {
+      myDiv.animate({
           scrollTop: myDiv[0].scrollHeight
         },
         duration
@@ -228,7 +241,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
       key: gapikey
     };
 
-    $.getJSON(URL, options, function(data) {
+    $.getJSON(URL, options, function (data) {
       console.log(data);
       let id = data.items[0].id.videoId;
       let id2 = data.items[1].id.videoId;
@@ -250,14 +263,14 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   player.connect();
 
   //play on click
-  $(".play").on("click", function() {
+  $(".play").on("click", function () {
     player.resume().then(() => {
       console.log("Resumed!");
     });
   });
 
   //pause on click
-  $(".pause").on("click", function() {
+  $(".pause").on("click", function () {
     player.pause().then(() => {
       console.log("Paused!");
     });
@@ -265,7 +278,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 };
 
 // when the user searches
-$(document).on("click", "#searchButton", function(event) {
+$(document).on("click", "#searchButton", function (event) {
   //change the max height of the lyrics div
   $("#lyrics").css("max-height", "");
   event.preventDefault();
@@ -282,7 +295,7 @@ $(document).on("click", "#searchButton", function(event) {
     headers: {
       Authorization: "Bearer " + spotifyToken
     }
-  }).done(function(res) {
+  }).done(function (res) {
     console.log(res);
     //empty out the three divs to prepare for new elements to be added
     $("#spotify, #youtube, #lyrics").empty();
@@ -296,118 +309,118 @@ $(document).on("click", "#searchButton", function(event) {
     //adding image and buttons
     $("#spotify").append(
       $("<div>")
-        .addClass("searchResult animated slideInUp")
-        .append("<img src='" + res.tracks.items[0].album.images[1].url + "'>")
-        .append(
-          $("<button>")
-            .addClass("controlButton apiPlayTrack")
-            .attr("data-artist", res.tracks.items[0].artists[0].name)
-            .attr("data-track", res.tracks.items[0].name)
-            .attr("data-cover", res.tracks.items[0].album.images[2].url)
-            .attr("data-request", res.tracks.items[0].id)
-            .attr("data-duration", res.tracks.items[0].duration_ms)
-            .append("<i>")
-            .addClass("far fa-play-circle fa-4x")
-        )
-        .append(
-          $("<button>")
-            .addClass("controlButton favouriteButton")
-            .append("<i>")
-            .attr("data-artist", res.tracks.items[0].artists[0].name)
-            .attr("data-track", res.tracks.items[0].name)
-            .attr("data-request", res.tracks.items[0].id)
-            .addClass("far fa-heart fa-4x")
-        )
-        .append(
-          "<span class='playTrack'>" + res.tracks.items[0].name + "</span>"
-        )
-        .append(
-          "<span class='playArtist'>" +
-            res.tracks.items[0].artists[0].name +
-            "</span>"
-        )
+      .addClass("searchResult animated slideInUp")
+      .append("<img src='" + res.tracks.items[0].album.images[1].url + "'>")
+      .append(
+        $("<button>")
+        .addClass("controlButton apiPlayTrack")
+        .attr("data-artist", res.tracks.items[0].artists[0].name)
+        .attr("data-track", res.tracks.items[0].name)
+        .attr("data-cover", res.tracks.items[0].album.images[2].url)
+        .attr("data-request", res.tracks.items[0].id)
+        .attr("data-duration", res.tracks.items[0].duration_ms)
+        .append("<i>")
+        .addClass("far fa-play-circle fa-4x")
+      )
+      .append(
+        $("<button>")
+        .addClass("controlButton favouriteButton")
+        .append("<i>")
+        .attr("data-artist", res.tracks.items[0].artists[0].name)
+        .attr("data-track", res.tracks.items[0].name)
+        .attr("data-request", res.tracks.items[0].id)
+        .addClass("far fa-heart fa-4x")
+      )
+      .append(
+        "<span class='playTrack'>" + res.tracks.items[0].name + "</span>"
+      )
+      .append(
+        "<span class='playArtist'>" +
+        res.tracks.items[0].artists[0].name +
+        "</span>"
+      )
     );
 
     $("#youtube").append(
       $("<div>")
-        .addClass("searchResult animated slideInUp")
-        .append("<img src='" + res.tracks.items[1].album.images[1].url + "'>")
-        .append(
-          $("<button>")
-            .addClass("controlButton apiPlayTrack")
-            .attr("data-artist", res.tracks.items[1].artists[0].name)
-            .attr("data-track", res.tracks.items[1].name)
-            .attr("data-cover", res.tracks.items[1].album.images[2].url)
-            .attr("data-request", res.tracks.items[1].id)
-            .attr("data-duration", res.tracks.items[1].duration_ms)
-            .append("<i>")
-            .addClass("far fa-play-circle fa-4x")
-        )
-        .append(
-          $("<button>")
-            .addClass("controlButton favouriteButton")
-            .append("<i>")
-            .attr("data-artist", res.tracks.items[1].artists[0].name)
-            .attr("data-track", res.tracks.items[1].name)
-            .attr("data-request", res.tracks.items[1].id)
-            .addClass("far fa-heart fa-4x")
-        )
-        .append(
-          "<span class='playTrack'>" + res.tracks.items[1].name + "</span>"
-        )
-        .append(
-          "<span class='playArtist'>" +
-            res.tracks.items[1].artists[0].name +
-            "</span>"
-        )
+      .addClass("searchResult animated slideInUp")
+      .append("<img src='" + res.tracks.items[1].album.images[1].url + "'>")
+      .append(
+        $("<button>")
+        .addClass("controlButton apiPlayTrack")
+        .attr("data-artist", res.tracks.items[1].artists[0].name)
+        .attr("data-track", res.tracks.items[1].name)
+        .attr("data-cover", res.tracks.items[1].album.images[2].url)
+        .attr("data-request", res.tracks.items[1].id)
+        .attr("data-duration", res.tracks.items[1].duration_ms)
+        .append("<i>")
+        .addClass("far fa-play-circle fa-4x")
+      )
+      .append(
+        $("<button>")
+        .addClass("controlButton favouriteButton")
+        .append("<i>")
+        .attr("data-artist", res.tracks.items[1].artists[0].name)
+        .attr("data-track", res.tracks.items[1].name)
+        .attr("data-request", res.tracks.items[1].id)
+        .addClass("far fa-heart fa-4x")
+      )
+      .append(
+        "<span class='playTrack'>" + res.tracks.items[1].name + "</span>"
+      )
+      .append(
+        "<span class='playArtist'>" +
+        res.tracks.items[1].artists[0].name +
+        "</span>"
+      )
     );
 
     $("#lyrics").append(
       $("<div>")
-        .addClass("searchResult animated slideInUp")
-        .append("<img src='" + res.tracks.items[2].album.images[1].url + "'>")
-        .append(
-          $("<button>")
-            .addClass("controlButton apiPlayTrack")
-            .attr("data-artist", res.tracks.items[2].artists[0].name)
-            .attr("data-track", res.tracks.items[2].name)
-            .attr("data-cover", res.tracks.items[2].album.images[2].url)
-            .attr("data-request", res.tracks.items[2].id)
-            .attr("data-duration", res.tracks.items[2].duration_ms)
-            .append("<i>")
-            .addClass("far fa-play-circle fa-4x")
-        )
-        .append(
-          $("<button>")
-            .addClass("controlButton favouriteButton")
-            .append("<i>")
-            .attr("data-artist", res.tracks.items[2].artists[0].name)
-            .attr("data-track", res.tracks.items[2].name)
-            .attr("data-request", res.tracks.items[2].id)
-            .addClass("far fa-heart fa-4x")
-        )
-        .append(
-          "<span class='playTrack'>" + res.tracks.items[2].name + "</span>"
-        )
-        .append(
-          "<span class='playArtist'>" +
-            res.tracks.items[2].artists[0].name +
-            "</span>"
-        )
+      .addClass("searchResult animated slideInUp")
+      .append("<img src='" + res.tracks.items[2].album.images[1].url + "'>")
+      .append(
+        $("<button>")
+        .addClass("controlButton apiPlayTrack")
+        .attr("data-artist", res.tracks.items[2].artists[0].name)
+        .attr("data-track", res.tracks.items[2].name)
+        .attr("data-cover", res.tracks.items[2].album.images[2].url)
+        .attr("data-request", res.tracks.items[2].id)
+        .attr("data-duration", res.tracks.items[2].duration_ms)
+        .append("<i>")
+        .addClass("far fa-play-circle fa-4x")
+      )
+      .append(
+        $("<button>")
+        .addClass("controlButton favouriteButton")
+        .append("<i>")
+        .attr("data-artist", res.tracks.items[2].artists[0].name)
+        .attr("data-track", res.tracks.items[2].name)
+        .attr("data-request", res.tracks.items[2].id)
+        .addClass("far fa-heart fa-4x")
+      )
+      .append(
+        "<span class='playTrack'>" + res.tracks.items[2].name + "</span>"
+      )
+      .append(
+        "<span class='playArtist'>" +
+        res.tracks.items[2].artists[0].name +
+        "</span>"
+      )
     );
   });
 });
 
-$(window).scroll(function() {
+$(window).scroll(function () {
   $("#lyrics").css("display", "none");
 });
 
 //login and sign up modals
 
 function showRegisterForm() {
-  $(".loginBox").fadeOut("fast", function() {
+  $(".loginBox").fadeOut("fast", function () {
     $(".registerBox").fadeIn("fast");
-    $(".login-footer").fadeOut("fast", function() {
+    $(".login-footer").fadeOut("fast", function () {
       $(".register-footer").fadeIn("fast");
     });
     $(".modal-title").html("Register");
@@ -418,9 +431,9 @@ function showRegisterForm() {
 }
 
 function showLoginForm() {
-  $("#loginModal .registerBox").fadeOut("fast", function() {
+  $("#loginModal .registerBox").fadeOut("fast", function () {
     $(".loginBox").fadeIn("fast");
-    $(".register-footer").fadeOut("fast", function() {
+    $(".register-footer").fadeOut("fast", function () {
       $(".login-footer").fadeIn("fast");
     });
 
@@ -433,14 +446,14 @@ function showLoginForm() {
 
 function openLoginModal() {
   showLoginForm();
-  setTimeout(function() {
+  setTimeout(function () {
     $("#loginModal").modal("show");
   }, 230);
 }
 
 function openRegisterModal() {
   showRegisterForm();
-  setTimeout(function() {
+  setTimeout(function () {
     $("#loginModal").modal("show");
   }, 230);
 }
@@ -451,7 +464,7 @@ function shakeModal() {
     .addClass("alert alert-danger")
     .html("Invalid email/password combination");
   $('input[type="password"]').val("");
-  setTimeout(function() {
+  setTimeout(function () {
     $("#loginModal .modal-dialog").removeClass("shake");
   }, 1000);
 }
@@ -473,7 +486,7 @@ firebase.initializeApp(firebaseConfig);
 let databse = firebase.database();
 
 //signup user
-$(document).on("click", ".btn-register", function(event) {
+$(document).on("click", ".btn-register", function (event) {
   event.preventDefault();
 
   let email = $(".registerBox #email2").val();
@@ -501,7 +514,7 @@ $(document).on("click", ".btn-register", function(event) {
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(function(user) {
+    .then(function (user) {
       console.log(user);
       $("#signup")
         .text("Logout")
@@ -515,13 +528,13 @@ $(document).on("click", ".btn-register", function(event) {
         .attr("id", "userProfile")
         .removeAttr("onclick");
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
     });
 });
 
 //login a user
-$(document).on("click", ".btn-login", function(event) {
+$(document).on("click", ".btn-login", function (event) {
   event.preventDefault();
 
   let email = $(".loginBox #email").val();
@@ -530,7 +543,7 @@ $(document).on("click", ".btn-login", function(event) {
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .then(function(user) {
+    .then(function (user) {
       console.log(user);
       $("#signup")
         .text("Logout")
@@ -544,7 +557,7 @@ $(document).on("click", ".btn-login", function(event) {
         .attr("id", "userProfile")
         .removeAttr("onclick");
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
       alert("Incorrect Password or Username");
       shakeModal();
@@ -557,13 +570,13 @@ $(document).on("click", ".btn-login", function(event) {
 });
 
 //logout current user
-$(document).on("click", "#logout", function(event) {
+$(document).on("click", "#logout", function (event) {
   event.preventDefault();
 
   firebase
     .auth()
     .signOut()
-    .then(function() {
+    .then(function () {
       alert("User Signed Out");
       $("#userProfile")
         .text("Login")
@@ -577,13 +590,13 @@ $(document).on("click", "#logout", function(event) {
         .attr("id", "signup")
         .attr("onClick", "openRegisterModal();");
     })
-    .catch(function(err) {
+    .catch(function (err) {
       console.log(err);
     });
 });
 
 //fill in favourite button
-$(document).on("click", ".favouriteButton", function(event) {
+$(document).on("click", ".favouriteButton", function (event) {
   $(this)
     .addClass("fas favourited")
     .removeClass("far")
@@ -593,7 +606,7 @@ $(document).on("click", ".favouriteButton", function(event) {
 });
 
 //unfill favourite button
-$(document).on("click", ".favourited", function() {
+$(document).on("click", ".favourited", function () {
   $(this)
     .addClass("far")
     .removeClass("fas favourited")
