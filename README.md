@@ -9,7 +9,7 @@ Potentials: Link to Youtube to play video and Google Authentication for user to 
 List of Tech Used (so far): HTML, CSS, Youtube API, Spotify API, APISeeds Lyrics, Animate CSS, Javascript, jQuery, Bootstrap, Flexbox, Firebase
  
 George - Youtube API/Javascript/jQuery<br>
-Chris - Branch Master/APISeeds Lyrics API/jQuery/Javascript/HTML/CSS <br>
+Chris - APISeeds Lyrics API/jQuery/Javascript/HTML/CSS <br>
 Jordan - Spotify API/HTML/CSS/Boostrap/FlexBox/jQuery/Javascript/Animate.CSS
 
 
