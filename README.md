@@ -1,6 +1,6 @@
 
 
-<h1>MusicHead</h1>
+<h1>Music Heads</h1>
 
 Description(MVP): Using the Spotify API and MusixMatch API, created a website that allows user to search for music to find songs and then play them within the browser. 
 
